@@ -1,23 +1,18 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import { INavBarProps } from '../../@types/components/navbar/navbar.props';
 
-export const Navbar = () => {
+export const Navbar = async ({ tabs }: INavBarProps) => {
   return (
     <Tabs>
       <TabList>
-        <Tab>Home</Tab>
-        <Tab>Create</Tab>
-        <Tab>Edit</Tab>
+        {tabs.map(tab => (
+          <Tab key={tab.title}>{tab.title}</Tab>
+        ))}
       </TabList>
       <TabPanels>
-        <TabPanel>
-          <p>Home</p>
-        </TabPanel>
-        <TabPanel>
-          <p>Create</p>
-        </TabPanel>
-        <TabPanel>
-          <p>Edit</p>
-        </TabPanel>
+        {tabs.map(tab => (
+          <TabPanel key={tab.title}>{tab.body}</TabPanel>
+        ))}
       </TabPanels>
     </Tabs>
   );
