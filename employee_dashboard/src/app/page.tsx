@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import { Navbar } from '../components/navbar/navbar.component';
+import { Box } from '@chakra-ui/react';
+import { NavBarItem } from '../components/navbar/item/item.component';
 
 export default function Home() {
   return (
@@ -9,15 +11,9 @@ export default function Home() {
           {
             title: 'Home',
             body: (
-              <div>
-                <Image
-                  src="/vercel.svg"
-                  alt="Vercel Logo"
-                  width={72}
-                  height={16}
-                  priority
-                />
-              </div>
+              <NavBarItem>
+                <p>Home :D</p>
+              </NavBarItem>
             ),
           },
         ]}

@@ -11,7 +11,7 @@ export const Navbar = async ({ tabs }: INavBarProps) => {
           </Tab>
         ))}
       </TabList>
-      <TabPanels paddingX={2}>
+      <TabPanels>
         {tabs.map(tab => (
           <TabPanel key={tab.title}>{tab.body}</TabPanel>
         ))}
