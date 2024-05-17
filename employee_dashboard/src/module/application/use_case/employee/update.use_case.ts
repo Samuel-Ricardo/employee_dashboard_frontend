@@ -1,4 +1,4 @@
-import { IUpdateEmployeeDTO } from '@/module/domain/DTO/employee/update.dto';
+import { IUpdateEmployeeDTO } from '../../../domain/DTO/employee/update.dto';
 import { NodeHttpEmployeeGatewaySupport } from '../../support/gateway/http/node/employee.gateway';
 import { injectable } from 'inversify';
 

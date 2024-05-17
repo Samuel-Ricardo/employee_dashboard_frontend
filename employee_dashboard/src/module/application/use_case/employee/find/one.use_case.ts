@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
-import { NodeHttpEmployeeGatewaySupport } from '@/module/application/support/gateway/http/node/employee.gateway';
-import { IFindOneEmployeeDTO } from '@/module/domain/DTO/employee/find/one.dto';
+import { NodeHttpEmployeeGatewaySupport } from '../../../support/gateway/http/node/employee.gateway';
+import { IFindOneEmployeeDTO } from '../../../../domain/DTO/employee/find/one.dto'; 
 
 @injectable()
 export class FindOneEmployeeUseCase extends NodeHttpEmployeeGatewaySupport {

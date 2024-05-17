@@ -1,9 +1,9 @@
-import { MODULE } from '@/module/app.registry';
-import { ICreateEmployeeDTO } from '@/module/domain/DTO/employee/create.dto';
-import { IDeleteEmployeeDTO } from '@/module/domain/DTO/employee/delete.dto';
-import { IFindOneEmployeeDTO } from '@/module/domain/DTO/employee/find/one.dto';
-import { IUpdateEmployeeDTO } from '@/module/domain/DTO/employee/update.dto';
-import { IEmployeeService } from '@/module/domain/service/employee.service';
+import { MODULE } from '../../../app.registry';  
+import { ICreateEmployeeDTO } from '../../../domain/DTO/employee/create.dto'; 
+import { IDeleteEmployeeDTO } from '../../../domain/DTO/employee/delete.dto'; 
+import { IFindOneEmployeeDTO } from '../../../domain/DTO/employee/find/one.dto'; 
+import { IUpdateEmployeeDTO } from '../../../domain/DTO/employee/update.dto'; 
+import { IEmployeeService } from '../../../domain/service/employee.service'; 
 import { inject, injectable } from 'inversify';
 import { CreateEmployeeUseCase } from '../../use_case/employee/create.use_case';
 import { UpdateEmployeeUseCase } from '../../use_case/employee/update.use_case';

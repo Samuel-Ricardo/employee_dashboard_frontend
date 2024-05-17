@@ -1,5 +1,5 @@
 import { NodeHttpEmployeeGatewaySupport } from '../../support/gateway/http/node/employee.gateway';
-import { ICreateEmployeeDTO } from '@/module/domain/DTO/employee/create.dto';
+import { ICreateEmployeeDTO } from '../../../domain/DTO/employee/create.dto';
 import { injectable } from 'inversify';
 
 @injectable()

@@ -1,6 +1,6 @@
-import { MODULE } from '@/module/app.registry';
-import { injectEngine } from '@/module/infra/engine/engine.module';
-import { HttpNodeEngine } from '@/module/infra/engine/gateway/http/node.engine';
+import { MODULE } from '../../../../../app.registry'; 
+import { injectEngine } from '../../../../../infra/engine/engine.module'; 
+import { HttpNodeEngine } from '../../../../../infra/engine/gateway/http/node.engine'; 
 import { injectable } from 'inversify';
 
 @injectable()

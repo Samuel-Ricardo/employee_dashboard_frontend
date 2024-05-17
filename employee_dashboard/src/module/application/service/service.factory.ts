@@ -1,4 +1,4 @@
-import { IEmployeeService } from '@/module/domain/service/employee.service';
+import { IEmployeeService } from '../../domain/service/employee.service'; 
 import { SERVICE_MODULE } from './service.module';
 import { SERVICE_REGISTRY } from './service.registry';
 

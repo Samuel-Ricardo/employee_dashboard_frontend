@@ -1,12 +1,12 @@
-import { NodeHttpGatewaySupport } from '@/module/application/support/gatewy/http/node.support';
-import { ICreateEmployeeDTO } from '@/module/domain/DTO/employee/create.dto';
-import { IDeleteEmployeeDTO } from '@/module/domain/DTO/employee/delete.dto';
-import { IEmployeeDTO } from '@/module/domain/DTO/employee/employee.dto';
-import { IFindOneEmployeeDTO } from '@/module/domain/DTO/employee/find/one.dto';
-import { IUpdateEmployeeDTO } from '@/module/domain/DTO/employee/update.dto';
-import { ICreateEmployeeOutputDTO } from '@/module/domain/DTO/outoput/employee/create.dto';
-import { Employee } from '@/module/domain/entity/employee.entity';
-import { IEmployeeGateway } from '@/module/domain/gateway/employee.gateway';
+import { NodeHttpGatewaySupport } from '../../../../support/engine/gateway/http/node.support';  
+import { ICreateEmployeeDTO } from '../../../../../domain/DTO/employee/create.dto'; 
+import { IDeleteEmployeeDTO } from '../../../../../domain/DTO/employee/delete.dto';
+import { IEmployeeDTO } from '../../../../../domain/DTO/employee/employee.dto'; 
+import { IFindOneEmployeeDTO } from '../../../../../domain/DTO/employee/find/one.dto'; 
+import { IUpdateEmployeeDTO } from '../../../../../domain/DTO/employee/update.dto';
+import { ICreateEmployeeOutputDTO } from '../../../../../domain/DTO/outoput/employee/create.dto'; 
+import { Employee } from '../../../../../domain/entity/employee.entity';
+import { IEmployeeGateway } from '../../../../../domain/gateway/employee.gateway'; 
 import { injectable } from 'inversify';
 
 @injectable()
