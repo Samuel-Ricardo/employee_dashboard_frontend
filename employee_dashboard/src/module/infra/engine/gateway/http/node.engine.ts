@@ -32,4 +32,12 @@ export class HttpNodeEngine implements HTTPGateway<RequestInit, Response> {
       body: JSON.stringify(body),
     });
   }
+
+  async delete(url: string, config?: RequestInit) {
+    return await fetch(url, {
+      ...this._defaultConfig(url),
+      ...config,
+      method: 'DELETE',
+    });
+  }
 }
