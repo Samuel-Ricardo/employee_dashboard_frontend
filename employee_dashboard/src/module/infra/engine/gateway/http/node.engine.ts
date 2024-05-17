@@ -14,4 +14,13 @@ export class HttpNodeEngine implements HTTPGateway<RequestInit, Response> {
       ...config,
     });
   }
+
+  async post(url: string, body: any, config?: RequestInit) {
+    return await fetch(url, {
+      ...this._defaultConfig(url),
+      ...config,
+      method: 'POST',
+      body: JSON.stringify(body),
+    });
+  }
 }
