@@ -1,6 +1,8 @@
 import { RequestInit } from 'next/dist/server/web/spec-extension/request';
 import { HTTPGateway } from './http.gateway';
+import { injectable } from 'inversify';
 
+@injectable()
 export class HttpNodeEngine implements HTTPGateway<RequestInit, Response> {
   private _defaultConfig(url: string): RequestInit {
     return {
