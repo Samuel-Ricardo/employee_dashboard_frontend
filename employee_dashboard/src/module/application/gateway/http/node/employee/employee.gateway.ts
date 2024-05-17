@@ -1,5 +1,6 @@
 import { NodeHttpGatewaySupport } from '@/module/application/support/gatewy/http/node.support';
 import { ICreateEmployeeDTO } from '@/module/domain/DTO/employee/create.dto';
+import { IDeleteEmployeeDTO } from '@/module/domain/DTO/employee/delete.dto';
 import { IEmployeeDTO } from '@/module/domain/DTO/employee/employee.dto';
 import { IFindOneEmployeeDTO } from '@/module/domain/DTO/employee/find/one.dto';
 import { IUpdateEmployeeDTO } from '@/module/domain/DTO/employee/update.dto';
@@ -40,5 +41,9 @@ export class NodeHttpEmployeeGateway
 
   async update({ id, ...DTO }: IUpdateEmployeeDTO) {
     await this._engine.patch(`${this._url}/${id}`, DTO);
+  }
+
+  async delete({ id }: IDeleteEmployeeDTO) {
+    await this._engine.delete(`${this._url}/${id}`);
   }
 }
