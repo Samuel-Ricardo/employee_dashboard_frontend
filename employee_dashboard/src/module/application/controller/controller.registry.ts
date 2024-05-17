@@ -1,0 +1,3 @@
+export const CONTROLLER_REGISTRY = {
+  EMPLOYEE: Symbol.for('MODULE::CONTROLLER::EMPLOYEE'),
+};
