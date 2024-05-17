@@ -37,9 +37,11 @@ export class EmployeeService implements IEmployeeService {
   async delete(DTO: IDeleteEmployeeDTO) {
     return this._delete.execute(DTO);
   }
+
   async findOne(DTO: IFindOneEmployeeDTO) {
     return this._findOne.execute(DTO);
   }
+
   async findAll() {
     return this._findAll.execute();
   }
