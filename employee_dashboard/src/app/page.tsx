@@ -1,7 +1,10 @@
+import 'reflect-metadata';
+
 import Image from 'next/image';
 import { Navbar } from '../components/navbar/navbar.component';
 import { Box } from '@chakra-ui/react';
 import { NavBarItem } from '../components/navbar/item/item.component';
+import { HomePage } from './page/home.page';
 
 export default function Home() {
   return (
@@ -12,7 +15,7 @@ export default function Home() {
             title: 'Home',
             body: (
               <NavBarItem>
-                <p>Home :D</p>
+                <HomePage />
               </NavBarItem>
             ),
           },

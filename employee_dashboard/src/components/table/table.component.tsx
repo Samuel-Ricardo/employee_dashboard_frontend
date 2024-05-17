@@ -12,7 +12,7 @@ import { ITableProps } from '../../@types/components/table/table.props';
 export const TableList = ({ caption, fields, children }: ITableProps) => {
   return (
     <TableContainer>
-      <Table>
+      <Table variant="striped" colorScheme="red">
         <TableCaption>{caption}</TableCaption>
 
         <Thead>

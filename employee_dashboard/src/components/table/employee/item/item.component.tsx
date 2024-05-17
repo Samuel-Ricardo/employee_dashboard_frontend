@@ -1,10 +1,12 @@
+'use client';
+
 import { Tr, Td, Stack, Button } from '@chakra-ui/react';
 import { IEmployeeTableItem } from '../../../../@types/components/table/employee/item/item.type';
 
 import Link from 'next/link';
 import { MODULES } from '../../../../module/app.factory';
 
-export const EmployeeTableItem = async ({
+export const EmployeeTableItem = ({
   id,
   name,
   role,
@@ -22,7 +24,13 @@ export const EmployeeTableItem = async ({
           <Link href={`/employee/edit/${id}`}>
             <Button>Editar</Button>
           </Link>
-          <Button onClick={() => _module.delete({ id })}>Excluir</Button>
+          <Button
+            onClick={() => {
+              _module.delete({ id });
+            }}
+          >
+            Excluir
+          </Button>
         </Stack>
       </Td>
     </Tr>
