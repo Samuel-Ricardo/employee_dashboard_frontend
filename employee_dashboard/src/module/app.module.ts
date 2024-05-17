@@ -5,4 +5,4 @@ const _MODULE = new Container({
   autoBindInjectable: true,
 });
 
-export const MODULES = Container.merge(_MODULE, INFRA_MODULE);
+export const APP_MODULE = Container.merge(_MODULE, INFRA_MODULE);
