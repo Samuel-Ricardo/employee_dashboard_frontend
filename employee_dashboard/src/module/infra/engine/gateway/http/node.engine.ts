@@ -23,4 +23,13 @@ export class HttpNodeEngine implements HTTPGateway<RequestInit, Response> {
       body: JSON.stringify(body),
     });
   }
+
+  async put<B>(url: string, body: B, config?: RequestInit) {
+    return await fetch(url, {
+      ...this._defaultConfig(url),
+      ...config,
+      method: 'PUT',
+      body: JSON.stringify(body),
+    });
+  }
 }
