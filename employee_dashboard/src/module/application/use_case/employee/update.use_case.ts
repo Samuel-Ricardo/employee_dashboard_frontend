@@ -4,7 +4,7 @@ import { injectable } from 'inversify';
 
 @injectable()
 export class UpdateEmployeeUseCase extends NodeHttpEmployeeGatewaySupport {
-  async execture(DTO: IUpdateEmployeeDTO) {
+  async execute(DTO: IUpdateEmployeeDTO) {
     return await this._gateway.update(DTO);
   }
 }
