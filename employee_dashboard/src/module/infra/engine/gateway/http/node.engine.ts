@@ -7,4 +7,11 @@ export class HttpNodeEngine implements HTTPGateway<RequestInit, Response> {
       next: { revalidate: 10, tags: [url] },
     };
   }
+
+  async get(url: string, config?: RequestInit) {
+    return await fetch(url, {
+      ...this._defaultConfig(url),
+      ...config,
+    });
+  }
 }
