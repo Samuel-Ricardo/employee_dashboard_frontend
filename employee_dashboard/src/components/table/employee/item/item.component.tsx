@@ -1,10 +1,15 @@
 import { Tr, Td, Stack, Button } from '@chakra-ui/react';
-import { ITableItem } from '../../../../@types/components/table/item/item.type';
+import { IEmployeeTableItem } from '../../../../@types/components/table/employee/item/item.type';
 
 import Link from 'next/link';
 import { MODULES } from '../../../../module/app.factory';
 
-export const TableItem = async ({ id, name, role, department }: ITableItem) => {
+export const EmployeeTableItem = async ({
+  id,
+  name,
+  role,
+  department,
+}: IEmployeeTableItem) => {
   const _module = MODULES.APPLICATION.CONTROLLER.EMPLOYEE();
 
   return (
