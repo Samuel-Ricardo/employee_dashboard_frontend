@@ -1,6 +1,7 @@
 import { NodeHttpGatewaySupport } from '@/module/application/support/gatewy/http/node.support';
 import { ICreateEmployeeDTO } from '@/module/domain/DTO/employee/create.dto';
 import { IEmployeeDTO } from '@/module/domain/DTO/employee/employee.dto';
+import { IFindOneEmployeeDTO } from '@/module/domain/DTO/employee/find/one.dto';
 import { ICreateEmployeeOutputDTO } from '@/module/domain/DTO/outoput/employee/create.dto';
 import { Employee } from '@/module/domain/entity/employee.entity';
 import { IEmployeeGateway } from '@/module/domain/gateway/employee.gateway';
@@ -27,5 +28,12 @@ export class NodeHttpEmployeeGateway
     const result = (await response.json()) as IEmployeeDTO[];
 
     return result.map(Employee.fromDTO);
+  }
+
+  async findOne({ id }: IFindOneEmployeeDTO) {
+    const response = await this._engine.get(`${this._url}/${id}`);
+    const result = (await response.json()) as IEmployeeDTO;
+
+    return Employee.fromDTO(result);
   }
 }
