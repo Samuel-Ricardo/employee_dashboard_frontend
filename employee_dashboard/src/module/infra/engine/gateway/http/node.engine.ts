@@ -40,4 +40,13 @@ export class HttpNodeEngine implements HTTPGateway<RequestInit, Response> {
       method: 'DELETE',
     });
   }
+
+  async patch<B>(url: string, body: B, config?: RequestInit) {
+    return await fetch(url, {
+      ...this._defaultConfig(url),
+      ...config,
+      method: 'PATCH',
+      body: JSON.stringify(body),
+    });
+  }
 }
