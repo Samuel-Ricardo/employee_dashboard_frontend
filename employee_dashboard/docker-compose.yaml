@@ -3,7 +3,7 @@ version: '3.8'
 services:
   site:
     build: .
-    command: ['npm', 'run', 'dev']
+    #    command: ['npm', 'run', 'start:docker']
     ports:
       - '3000:3000'
     volumes:
@@ -12,14 +12,18 @@ services:
       - .env.local
     external_links:
       - 'host.docker.internal'
+    depends_on:
+      - api
 
   api:
     image: ghcr.io/samuel-ricardo/employee-dashboard_backend:main
     restart: always
     ports:
-      - '3000:3000'
+      - '3001:3000'
     env_file:
-      - .env.local
+      - .env
+    depends_on:
+      - mongo
 
   mongo:
     image: mongo:latest

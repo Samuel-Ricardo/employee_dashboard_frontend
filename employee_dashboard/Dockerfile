@@ -9,5 +9,5 @@ RUN npm ci
 COPY --chown=node:node . .
 RUN npm run build:clean
 
-#CMD ["npm", "run", "start:prod"]
+CMD ["npm", "run", "start"]
 
