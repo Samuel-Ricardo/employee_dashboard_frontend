@@ -29,6 +29,8 @@ export class NodeHttpEmployeeGateway
     const response = await this._engine.get(this._url);
     const result = (await response.json()) as IEmployeeDTO[];
 
+    console.log({ result });
+
     return result.map(Employee.fromDTO);
   }
 
