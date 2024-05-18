@@ -2,6 +2,7 @@ import { Box, Button, Heading } from '@chakra-ui/react';
 import { EmployeeTable } from '../../components/table/employee/table.component';
 import { MODULES } from '../../module/app.factory';
 import { IEmployeeTableItem } from '../../@types/components/table/employee/item/item.type';
+import Link from 'next/link';
 
 export const HomePage = async () => {
   let employees: IEmployeeTableItem[] = [];
@@ -20,9 +21,11 @@ export const HomePage = async () => {
         Home Page
       </Heading>
       <EmployeeTable itens={employees} />
-      <Button marginX={4} marginY={2}>
-        Adicionar um novo funcionário
-      </Button>
+      <Link href="/employee/create">
+        <Button marginX={4} marginY={2}>
+          Adicionar um novo funcionário
+        </Button>
+      </Link>
     </Box>
   );
 };

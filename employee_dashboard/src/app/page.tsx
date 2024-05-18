@@ -1,10 +1,9 @@
 import 'reflect-metadata';
 
-import Image from 'next/image';
 import { Navbar } from '../components/navbar/navbar.component';
-import { Box } from '@chakra-ui/react';
 import { NavBarItem } from '../components/navbar/item/item.component';
 import { HomePage } from './page/home.page';
+import { CreateEmployeePage } from './page/employee/create/employee.page';
 
 export default function Home() {
   return (
@@ -16,6 +15,14 @@ export default function Home() {
             body: (
               <NavBarItem>
                 <HomePage />
+              </NavBarItem>
+            ),
+          },
+          {
+            title: 'Create',
+            body: (
+              <NavBarItem>
+                <CreateEmployeePage />
               </NavBarItem>
             ),
           },
