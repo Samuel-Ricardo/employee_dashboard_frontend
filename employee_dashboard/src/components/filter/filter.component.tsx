@@ -1,39 +1,50 @@
 'use client';
 import {
+  Button,
   FormControl,
   FormLabel,
-  Input,
   HStack,
+  Input,
   Radio,
   RadioGroup,
   VStack,
-  Button,
 } from '@chakra-ui/react';
-import { IEmployeeFilterProps } from '../../@types/components/filter/employee.filter';
 import { useCallback, useState } from 'react';
-import { EmployeeTable } from '../table/employee/table.component';
+import { IEmployeeFilterProps } from '../../@types/components/filter/employee.filter';
 import { useEmployeeFilter } from '../../hook/employee/filter.hook';
+import { useEmployees } from '../../hook/query/employee/all.hook';
+import { IEmployeeDTO } from '../../module/domain/DTO/employee/employee.dto';
+import { EmployeeTable } from '../table/employee/table.component';
 
 export const EmployeeFilter = ({ employees }: IEmployeeFilterProps) => {
   const [data, setData] = useState(employees);
+  const { data: response, refetch } = useEmployees();
 
   const [input, setInput] = useState('');
   const [order, setOrder] = useState('none');
 
   const { filter } = useEmployeeFilter();
 
+  const sync = useCallback(
+    (newData: IEmployeeDTO[]) => {
+      refetch();
+      setData(filter(input, order, newData));
+    },
+    [filter, input, order, refetch],
+  );
+
   const handleInputChange = (e: any) => {
     setInput(e.target.value);
-    setData(filter(e.target.value, order, employees));
+    setData(filter(e.target.value, order, response?.result || employees));
   };
   const handleOrderChange = (value: string) => {
     setOrder(value);
-    setData(filter(input, value, employees));
+    setData(filter(input, value, response?.result || employees));
   };
 
   const onClick = useCallback(() => {
-    setData(filter(input, order, employees));
-  }, [filter, input, order, employees]);
+    sync(response?.result || employees);
+  }, [sync, response?.result, employees]);
 
   return (
     <>
@@ -63,7 +74,12 @@ export const EmployeeFilter = ({ employees }: IEmployeeFilterProps) => {
         </VStack>
       </FormControl>
 
-      <EmployeeTable itens={data as any} />
+      <EmployeeTable
+        itens={data as any}
+        onDelete={id => {
+          sync(response?.result || employees.filter(e => e.id !== id));
+        }}
+      />
     </>
   );
 };

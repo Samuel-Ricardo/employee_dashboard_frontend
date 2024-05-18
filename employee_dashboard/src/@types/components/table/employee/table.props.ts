@@ -5,4 +5,5 @@ import { IEmployeeTableItem } from './item/item.type';
 export interface IEmplyeeTableProps {
   itens: IEmployeeTableItem[];
   children?: ReactNode;
+  onDelete?: (id: string) => void;
 }
