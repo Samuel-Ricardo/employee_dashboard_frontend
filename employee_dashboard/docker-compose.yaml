@@ -6,10 +6,10 @@ services:
     #    command: ['npm', 'run', 'start:docker']
     ports:
       - '3000:3000'
-    volumes:
-      - .:/home/node/app
     env_file:
       - .env.local
+    volumes:
+      - .:/home/node/app
     external_links:
       - 'host.docker.internal'
     depends_on:
@@ -17,17 +17,19 @@ services:
 
   api:
     image: ghcr.io/samuel-ricardo/employee-dashboard_backend:main
-    restart: always
+    #restart: always
     ports:
       - '3001:3000'
     env_file:
       - .env
     depends_on:
       - mongo
+    external_links:
+      - 'host.docker.internal'
 
   mongo:
     image: mongo:latest
-    restart: always
+    #    restart: always
     ports:
       - '27017:27017'
     environment:
@@ -35,3 +37,5 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
       - ./.docker/data/db:/data/db
+    external_links:
+      - 'host.docker.internal'

@@ -14,9 +14,11 @@ export class NodeHttpEmployeeGateway
   extends NodeHttpGatewaySupport
   implements IEmployeeGateway
 {
-  private readonly _url = 'http://api:3000/api/employees';
+  private readonly _url =
+    'https://employee-dashboard-backend-main.onrender.com/api/employees';
 
   async create(DTO: ICreateEmployeeDTO) {
+    console.log({ DTO });
     const response = await this._engine.post(this._url, DTO);
     const responseadomamamia = (await response?.json()).result;
 
@@ -43,7 +45,7 @@ export class NodeHttpEmployeeGateway
   }
 
   async update({ id, ...DTO }: IUpdateEmployeeDTO) {
-    await this._engine.patch(`${this._url}/${id}`, DTO);
+    await this._engine.put(`${this._url}/${id}`, DTO);
   }
 
   async delete({ id }: IDeleteEmployeeDTO) {

@@ -1,9 +1,9 @@
-import { MODULE } from '../../../app.registry';  
-import { ICreateEmployeeDTO } from '../../../domain/DTO/employee/create.dto'; 
-import { IDeleteEmployeeDTO } from '../../../domain/DTO/employee/delete.dto'; 
-import { IFindOneEmployeeDTO } from '../../../domain/DTO/employee/find/one.dto'; 
-import { IUpdateEmployeeDTO } from '../../../domain/DTO/employee/update.dto'; 
-import { IEmployeeService } from '../../../domain/service/employee.service'; 
+import { MODULE } from '../../../app.registry';
+import { ICreateEmployeeDTO } from '../../../domain/DTO/employee/create.dto';
+import { IDeleteEmployeeDTO } from '../../../domain/DTO/employee/delete.dto';
+import { IFindOneEmployeeDTO } from '../../../domain/DTO/employee/find/one.dto';
+import { IUpdateEmployeeDTO } from '../../../domain/DTO/employee/update.dto';
+import { IEmployeeService } from '../../../domain/service/employee.service';
 import { inject, injectable } from 'inversify';
 import { CreateEmployeeUseCase } from '../../use_case/employee/create.use_case';
 import { UpdateEmployeeUseCase } from '../../use_case/employee/update.use_case';
@@ -27,7 +27,7 @@ export class EmployeeService implements IEmployeeService {
   ) {}
 
   async create(DTO: ICreateEmployeeDTO) {
-    return this._create.execute(DTO);
+    return await this._create.execute(DTO);
   }
 
   async update(DTO: IUpdateEmployeeDTO) {

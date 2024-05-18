@@ -3,6 +3,7 @@ import { EmployeeTable } from '../../components/table/employee/table.component';
 import { MODULES } from '../../module/app.factory';
 import { IEmployeeTableItem } from '../../@types/components/table/employee/item/item.type';
 import Link from 'next/link';
+import { EmployeeFilter } from '../../components/filter/filter.component';
 
 export const HomePage = async () => {
   let employees: IEmployeeTableItem[] = [];
@@ -18,9 +19,10 @@ export const HomePage = async () => {
   return (
     <Box>
       <Heading as="h1" width="100%" textAlign="center" marginBottom={4}>
-        Home Page
+        Dashboard de Funcionários
       </Heading>
-      <EmployeeTable itens={employees} />
+      <EmployeeFilter employees={employees} />
+      <EmployeeTable itens={[]} />
       <Link href="/employee/create">
         <Button marginX={4} marginY={2}>
           Adicionar um novo funcionário

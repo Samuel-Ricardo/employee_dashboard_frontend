@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MODULES } from '../../../../module/app.factory';
 import { CreateEmployeeFormData } from '../../../../module/application/validation/zod/form/employee/create.validation';
 import { useForm } from 'react-hook-form';
@@ -13,16 +13,26 @@ import {
   Input,
 } from '@chakra-ui/react';
 import { UpdateEmployeeFormData } from '../../../../module/application/validation/zod/form/employee/update.validation';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import { ICreateEmployeeDTO } from '../../../../module/domain/DTO/employee/create.dto';
 
 export const UpdateEmployeeForm = () => {
+  const _module = MODULES.APPLICATION.CONTROLLER.EMPLOYEE();
+
+  const r = useRouter();
+  const params = useParams();
+  const id = useMemo(() => params.id as string, [params.id]);
+
+  const [employee, setEmployee] = useState<ICreateEmployeeDTO>();
+
+  useEffect(() => {
+    _module.findOne({ id }).then(data => setEmployee(data.result));
+  }, [_module, id, setEmployee]);
+
   const VALIDATION = useMemo(
     () => MODULES.APPLICATION.VALIDAITON.ZOD.FORM.EMPLOYEE.UPDATE(),
     [],
   );
-
-  const params = useParams();
-  const id = useMemo(() => params.id as string, [params.id]);
 
   const {
     register,
@@ -34,15 +44,18 @@ export const UpdateEmployeeForm = () => {
 
   const submit = useCallback(
     () =>
-      handleSubmit(
-        async data =>
-          await MODULES.APPLICATION.CONTROLLER.EMPLOYEE().update({
-            id,
-            ...data,
-            admission_date: new Date(data.admission_date),
-          }),
-      ),
-    [handleSubmit, id],
+      handleSubmit(async data => {
+        await _module.update({
+          ...employee,
+          id,
+          ...data,
+          admission_date: new Date(
+            (data.admission_date || employee?.admission_date) as string,
+          ),
+        }),
+          r.push('/');
+      }),
+    [_module, handleSubmit, id, r, employee],
   );
 
   return (
@@ -56,13 +69,13 @@ export const UpdateEmployeeForm = () => {
         }
       >
         <FormLabel htmlFor="name">Nome</FormLabel>
-        <Input id="name" placeholder="nome..." {...register('name')} />
+        <Input id="name" placeholder={employee?.name} {...register('name')} />
         <FormErrorMessage>
           {errors.name && errors.name.message}
         </FormErrorMessage>
 
         <FormLabel htmlFor="role">Cargo</FormLabel>
-        <Input id="role" placeholder="cargo..." {...register('role')} />
+        <Input id="role" placeholder={employee?.role} {...register('role')} />
         <FormErrorMessage>
           {errors.role && errors.role.message}
         </FormErrorMessage>
@@ -70,7 +83,7 @@ export const UpdateEmployeeForm = () => {
         <FormLabel htmlFor="department">Departamento</FormLabel>
         <Input
           id="department"
-          placeholder="Departamento..."
+          placeholder={employee?.department}
           {...register('department')}
         />
         <FormErrorMessage>
@@ -81,7 +94,7 @@ export const UpdateEmployeeForm = () => {
         <Input
           id="admission_date"
           type="date"
-          placeholder="data..."
+          placeholder={employee?.admission_date?.toString()}
           {...register('admission_date')}
         />
         <FormErrorMessage>

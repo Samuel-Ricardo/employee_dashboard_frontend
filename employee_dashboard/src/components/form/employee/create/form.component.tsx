@@ -12,8 +12,11 @@ import {
   Button,
   Input,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
 
 export const CreateEmployeeForm = () => {
+  const r = useRouter();
+
   const VALIDATION = useMemo(
     () => MODULES.APPLICATION.VALIDAITON.ZOD.FORM.EMPLOYEE.CREATE(),
     [],
@@ -29,14 +32,14 @@ export const CreateEmployeeForm = () => {
 
   const submit = useCallback(
     () =>
-      handleSubmit(
-        async data =>
-          await MODULES.APPLICATION.CONTROLLER.EMPLOYEE().create({
-            ...data,
-            admission_date: new Date(data.admission_date),
-          }),
-      ),
-    [handleSubmit],
+      handleSubmit(async data => {
+        await MODULES.APPLICATION.CONTROLLER.EMPLOYEE().create({
+          ...data,
+          admission_date: new Date(data.admission_date),
+        }),
+          r.push('/');
+      }),
+    [handleSubmit, r],
   );
 
   return (
