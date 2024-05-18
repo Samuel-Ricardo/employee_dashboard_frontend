@@ -5,7 +5,7 @@
   "scripts": {
     "start:dev": "next dev",
     "build": "next build",
-    "build:clean": "npm run code:ci && npm run build",
+    "build:clean": "npm run code:ci && next build",
     "start": "next start",
     "start:docker": "npm run build && npm run start",
     "lint": "next lint",
