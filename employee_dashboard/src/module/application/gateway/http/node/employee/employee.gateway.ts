@@ -7,16 +7,23 @@ import { IUpdateEmployeeDTO } from '../../../../../domain/DTO/employee/update.dt
 import { ICreateEmployeeOutputDTO } from '../../../../../domain/DTO/outoput/employee/create.dto';
 import { Employee } from '../../../../../domain/entity/employee.entity';
 import { IEmployeeGateway } from '../../../../../domain/gateway/employee.gateway';
-import { injectable } from 'inversify';
+import { inject, injectable } from 'inversify';
+import { MODULE } from '../../../../../app.registry';
+import { injectConfig } from '../../../../../infra/config/config.module';
+import { ENV } from '../../../../../infra/config/env/env.config';
 
 @injectable()
 export class NodeHttpEmployeeGateway
   extends NodeHttpGatewaySupport
   implements IEmployeeGateway
 {
-  private readonly _url = 'http://api:3000/api/employees';
+  @injectConfig(MODULE.INFRA.CONFIG.API.URL)
+  private readonly API_URL: string = ENV.API.URL;
+
+  private readonly _url = `${this.API_URL}/api/employees`;
 
   async create(DTO: ICreateEmployeeDTO) {
+    console.log({ DTO });
     const response = await this._engine.post(this._url, DTO);
     const responseadomamamia = (await response?.json()).result;
 
@@ -43,10 +50,11 @@ export class NodeHttpEmployeeGateway
   }
 
   async update({ id, ...DTO }: IUpdateEmployeeDTO) {
-    await this._engine.patch(`${this._url}/${id}`, DTO);
+    await this._engine.put(`${this._url}/${id}`, DTO);
   }
 
   async delete({ id }: IDeleteEmployeeDTO) {
+    console.log('AAAAAAAAAAAAAAAAAAA', { id }, this._url);
     await this._engine.delete(`${this._url}/${id}`);
   }
 }

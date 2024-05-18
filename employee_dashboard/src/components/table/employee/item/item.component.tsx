@@ -5,6 +5,7 @@ import { IEmployeeTableItem } from '../../../../@types/components/table/employee
 
 import Link from 'next/link';
 import { MODULES } from '../../../../module/app.factory';
+import { useRouter } from 'next/navigation';
 
 export const EmployeeTableItem = ({
   id,
@@ -21,16 +22,10 @@ export const EmployeeTableItem = ({
       <Td>{department}</Td>
       <Td>
         <Stack spacing={2} direction="row" align="center">
-          <Link href={`/employee/edit/${id}`}>
+          <Link href={`/employee/${id}/edit`}>
             <Button>Editar</Button>
           </Link>
-          <Button
-            onClick={() => {
-              _module.delete({ id });
-            }}
-          >
-            Excluir
-          </Button>
+          <Button onClick={() => _module.delete({ id })}>Excluir</Button>
         </Stack>
       </Td>
     </Tr>
