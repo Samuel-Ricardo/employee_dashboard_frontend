@@ -1,5 +1,6 @@
 import { Box, Heading } from '@chakra-ui/react';
 import { CreateEmployeeForm } from '../../../../components/form/employee/create/form.component';
+import { UpdateEmployeeForm } from '../../../../components/form/employee/update/form.component';
 
 export const EditEmployeePage = () => {
   return (
@@ -8,7 +9,7 @@ export const EditEmployeePage = () => {
         Atualizar Funcionário
       </Heading>
 
-      <CreateEmployeeForm />
+      <UpdateEmployeeForm />
     </Box>
   );
 };
