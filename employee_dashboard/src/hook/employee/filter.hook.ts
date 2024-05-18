@@ -13,6 +13,8 @@ export const useEmployeeFilter = () => {
             )
           : data;
 
+      console.log({ result });
+
       switch (order) {
         case 'name':
           return result.sort((a, b) =>
@@ -30,7 +32,9 @@ export const useEmployeeFilter = () => {
           );
         case 'admission_date':
           return result.sort(
-            (a, b) => a.admission_date.getTime() - b.admission_date.getTime(),
+            (a, b) =>
+              new Date(b.admission_date).getTime() -
+              new Date(a.admission_date).getTime(),
           );
         default:
           return result;
