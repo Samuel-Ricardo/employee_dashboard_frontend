@@ -6,21 +6,25 @@ import { injectable } from 'inversify';
 export class HttpNodeEngine implements IHTTPGateway<RequestInit, Response> {
   private _defaultConfig(url: string): RequestInit {
     return {
-      next: { revalidate: 10, tags: [url] },
+      next: { tags: [url] },
+      mode: 'cors',
     };
   }
 
   async get(url: string, config?: RequestInit) {
+    console.log({ url: this._defaultConfig(`get::${url}`).next?.tags });
     return await fetch(url, {
-      ...this._defaultConfig(url),
+      ...this._defaultConfig(`get::${url}`),
       ...config,
     });
   }
 
   async post<B>(url: string, body: B, config?: RequestInit) {
+    console.log({ body });
     return await fetch(url, {
-      ...this._defaultConfig(url),
+      ...this._defaultConfig(`post::${url}`),
       ...config,
+      headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify(body),
     });
@@ -28,8 +32,9 @@ export class HttpNodeEngine implements IHTTPGateway<RequestInit, Response> {
 
   async put<B>(url: string, body: B, config?: RequestInit) {
     return await fetch(url, {
-      ...this._defaultConfig(url),
+      ...this._defaultConfig(`put::${url}`),
       ...config,
+      headers: { 'Content-Type': 'application/json' },
       method: 'PUT',
       body: JSON.stringify(body),
     });
@@ -37,7 +42,7 @@ export class HttpNodeEngine implements IHTTPGateway<RequestInit, Response> {
 
   async delete(url: string, config?: RequestInit) {
     return await fetch(url, {
-      ...this._defaultConfig(url),
+      ...this._defaultConfig(`delete::${url}`),
       ...config,
       method: 'DELETE',
     });
@@ -45,8 +50,9 @@ export class HttpNodeEngine implements IHTTPGateway<RequestInit, Response> {
 
   async patch<B>(url: string, body: B, config?: RequestInit) {
     return await fetch(url, {
-      ...this._defaultConfig(url),
+      ...this._defaultConfig(`patch::${url}`),
       ...config,
+      headers: { 'Content-Type': 'application/json' },
       method: 'PATCH',
       body: JSON.stringify(body),
     });

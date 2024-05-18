@@ -1,51 +1,60 @@
-import { NodeHttpGatewaySupport } from '../../../../support/engine/gateway/http/node.support';  
-import { ICreateEmployeeDTO } from '../../../../../domain/DTO/employee/create.dto'; 
+import { NodeHttpGatewaySupport } from '../../../../support/engine/gateway/http/node.support';
+import { ICreateEmployeeDTO } from '../../../../../domain/DTO/employee/create.dto';
 import { IDeleteEmployeeDTO } from '../../../../../domain/DTO/employee/delete.dto';
-import { IEmployeeDTO } from '../../../../../domain/DTO/employee/employee.dto'; 
-import { IFindOneEmployeeDTO } from '../../../../../domain/DTO/employee/find/one.dto'; 
+import { IEmployeeDTO } from '../../../../../domain/DTO/employee/employee.dto';
+import { IFindOneEmployeeDTO } from '../../../../../domain/DTO/employee/find/one.dto';
 import { IUpdateEmployeeDTO } from '../../../../../domain/DTO/employee/update.dto';
-import { ICreateEmployeeOutputDTO } from '../../../../../domain/DTO/outoput/employee/create.dto'; 
+import { ICreateEmployeeOutputDTO } from '../../../../../domain/DTO/outoput/employee/create.dto';
 import { Employee } from '../../../../../domain/entity/employee.entity';
-import { IEmployeeGateway } from '../../../../../domain/gateway/employee.gateway'; 
-import { injectable } from 'inversify';
+import { IEmployeeGateway } from '../../../../../domain/gateway/employee.gateway';
+import { inject, injectable } from 'inversify';
+import { MODULE } from '../../../../../app.registry';
+import { injectConfig } from '../../../../../infra/config/config.module';
+import { ENV } from '../../../../../infra/config/env/env.config';
 
 @injectable()
 export class NodeHttpEmployeeGateway
   extends NodeHttpGatewaySupport
   implements IEmployeeGateway
 {
-  private readonly _url = 'http://api:3000/api/employees';
+  @injectConfig(MODULE.INFRA.CONFIG.API.URL)
+  private readonly API_URL: string = ENV.API.URL;
+
+  private readonly _url = `${this.API_URL}/api/employees`;
 
   async create(DTO: ICreateEmployeeDTO) {
+    console.log({ DTO });
     const response = await this._engine.post(this._url, DTO);
-    const result = await response.json();
+    const responseadomamamia = (await response?.json()).result;
 
-    console.log({ result });
+    console.log({ responseadomamamia });
 
-    return result as ICreateEmployeeOutputDTO;
+    return responseadomamamia as ICreateEmployeeOutputDTO;
   }
 
   async findAll() {
     const response = await this._engine.get(this._url);
-    const result = (await response.json()) as IEmployeeDTO[];
+    const responseadomamamia = (await response?.json())
+      .result as IEmployeeDTO[];
 
-    console.log({ result });
+    console.log({ responseadomamamia });
 
-    return result.map(Employee.fromDTO);
+    return responseadomamamia.map(Employee.fromDTO);
   }
 
   async findOne({ id }: IFindOneEmployeeDTO) {
     const response = await this._engine.get(`${this._url}/${id}`);
-    const result = (await response.json()) as IEmployeeDTO;
+    const result = (await response?.json()).result as IEmployeeDTO;
 
     return Employee.fromDTO(result);
   }
 
   async update({ id, ...DTO }: IUpdateEmployeeDTO) {
-    await this._engine.patch(`${this._url}/${id}`, DTO);
+    await this._engine.put(`${this._url}/${id}`, DTO);
   }
 
   async delete({ id }: IDeleteEmployeeDTO) {
+    console.log('AAAAAAAAAAAAAAAAAAA', { id }, this._url);
     await this._engine.delete(`${this._url}/${id}`);
   }
 }
