@@ -7,15 +7,20 @@ import { IUpdateEmployeeDTO } from '../../../../../domain/DTO/employee/update.dt
 import { ICreateEmployeeOutputDTO } from '../../../../../domain/DTO/outoput/employee/create.dto';
 import { Employee } from '../../../../../domain/entity/employee.entity';
 import { IEmployeeGateway } from '../../../../../domain/gateway/employee.gateway';
-import { injectable } from 'inversify';
+import { inject, injectable } from 'inversify';
+import { MODULE } from '../../../../../app.registry';
+import { injectConfig } from '../../../../../infra/config/config.module';
+import { ENV } from '../../../../../infra/config/env/env.config';
 
 @injectable()
 export class NodeHttpEmployeeGateway
   extends NodeHttpGatewaySupport
   implements IEmployeeGateway
 {
-  private readonly _url =
-    'https://employee-dashboard-backend-main.onrender.com/api/employees';
+  @injectConfig(MODULE.INFRA.CONFIG.API.URL)
+  private readonly API_URL: string = ENV.API.URL;
+
+  private readonly _url = `${this.API_URL}/api/employees`;
 
   async create(DTO: ICreateEmployeeDTO) {
     console.log({ DTO });
@@ -49,6 +54,7 @@ export class NodeHttpEmployeeGateway
   }
 
   async delete({ id }: IDeleteEmployeeDTO) {
+    console.log('AAAAAAAAAAAAAAAAAAA', { id }, this._url);
     await this._engine.delete(`${this._url}/${id}`);
   }
 }
