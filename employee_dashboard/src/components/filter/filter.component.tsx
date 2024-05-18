@@ -52,7 +52,7 @@ export const EmployeeFilter = ({ employees }: IEmployeeFilterProps) => {
           </HStack>
           <FormLabel as="legend">Deseja ordenar a listagem?</FormLabel>
           <RadioGroup defaultValue="none" onChange={handleOrderChange}>
-            <HStack spacing="24px">
+            <HStack spacing="24px" maxW="80vw" overflowX="auto">
               <Radio value="none">não</Radio>
               <Radio value="name">sim, pelo nome</Radio>
               <Radio value="role">sim, pelo cargo</Radio>

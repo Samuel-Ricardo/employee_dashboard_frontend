@@ -15,8 +15,6 @@ export const EmployeeTableItem = ({
 }: IEmployeeTableItem) => {
   const _module = MODULES.APPLICATION.CONTROLLER.EMPLOYEE();
 
-  const r = useRouter();
-
   return (
     <Tr>
       <Td>{name}</Td>
@@ -27,14 +25,7 @@ export const EmployeeTableItem = ({
           <Link href={`/employee/${id}/edit`}>
             <Button>Editar</Button>
           </Link>
-          <Button
-            onClick={() => {
-              _module.delete({ id });
-              r.refresh();
-            }}
-          >
-            Excluir
-          </Button>
+          <Button onClick={() => _module.delete({ id })}>Excluir</Button>
         </Stack>
       </Td>
     </Tr>
