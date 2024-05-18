@@ -1,9 +1,7 @@
 'use client';
-
 import {
   FormControl,
   FormLabel,
-  FormHelperText,
   Input,
   HStack,
   Radio,
@@ -12,57 +10,30 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { IEmployeeFilterProps } from '../../@types/components/filter/employee.filter';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { EmployeeTable } from '../table/employee/table.component';
-import { MODULES } from '../../module/app.factory';
-import { IEmployeeTableItem } from '../../@types/components/table/employee/item/item.type';
+import { useEmployeeFilter } from '../../hook/employee/filter.hook';
 
 export const EmployeeFilter = ({ employees }: IEmployeeFilterProps) => {
   const [data, setData] = useState(employees);
 
-  const filter = useCallback(
-    (search: string, order: string) => {
-      const result = data.filter(employee =>
-        employee.name.toLowerCase().includes(search.toLowerCase()),
-      );
-
-      switch (order) {
-        case 'name':
-          return result.sort((a, b) =>
-            a.name.toLowerCase().localeCompare(b.name.toLowerCase()),
-          );
-        case 'role':
-          return result.sort((a, b) =>
-            a.role.toLowerCase().localeCompare(b.role.toLowerCase()),
-          );
-        case 'department':
-          return result.sort((a, b) =>
-            a.department
-              .toLowerCase()
-              .localeCompare(b.department.toLowerCase()),
-          );
-        case 'admission_date':
-          return result.sort(
-            (a, b) => a.admission_date.getTime() - b.admission_date.getTime(),
-          );
-        default:
-          return result;
-      }
-    },
-    [data],
-  );
-
   const [input, setInput] = useState('');
+  const [order, setOrder] = useState('none');
+
+  const { filter } = useEmployeeFilter();
+
   const handleInputChange = (e: any) => {
     setInput(e.target.value);
-    setData(filter(e.target.value, 'none'));
+    setData(filter(e.target.value, order, employees));
+  };
+  const handleOrderChange = (value: string) => {
+    setOrder(value);
+    setData(filter(input, value, employees));
   };
 
   const onClick = useCallback(() => {
-    MODULES.APPLICATION.CONTROLLER.EMPLOYEE()
-      .findAll()
-      .then(({ result }) => setData(result));
-  }, []);
+    setData(filter(input, order, employees));
+  }, [filter, input, order, employees]);
 
   return (
     <>
@@ -80,10 +51,7 @@ export const EmployeeFilter = ({ employees }: IEmployeeFilterProps) => {
             </Button>
           </HStack>
           <FormLabel as="legend">Deseja ordenar a listagem?</FormLabel>
-          <RadioGroup
-            defaultValue="none"
-            onChange={order => setData(filter(input, order))}
-          >
+          <RadioGroup defaultValue="none" onChange={handleOrderChange}>
             <HStack spacing="24px">
               <Radio value="none">não</Radio>
               <Radio value="name">sim, pelo nome</Radio>
@@ -95,7 +63,7 @@ export const EmployeeFilter = ({ employees }: IEmployeeFilterProps) => {
         </VStack>
       </FormControl>
 
-      <EmployeeTable itens={data as IEmployeeTableItem[]} />
+      <EmployeeTable itens={data as any} />
     </>
   );
 };
