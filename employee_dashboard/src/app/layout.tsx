@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ChakraUIProvider } from '../provider/ui/chakra/chakra.provider';
+import TanStackQueryProvider from '../provider/query/tanstack.provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ChakraUIProvider>{children}</ChakraUIProvider>
+        <ChakraUIProvider>
+          <TanStackQueryProvider>{children}</TanStackQueryProvider>
+        </ChakraUIProvider>
       </body>
     </html>
   );
