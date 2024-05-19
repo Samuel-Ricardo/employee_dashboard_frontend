@@ -3,7 +3,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MODULES } from '../../../../module/app.factory';
-import { CreateEmployeeFormData } from '../../../../module/application/validation/zod/form/employee/create.validation';
 import { useForm } from 'react-hook-form';
 import {
   FormControl,
@@ -69,13 +68,13 @@ export const UpdateEmployeeForm = () => {
         }
       >
         <FormLabel htmlFor="name">Nome</FormLabel>
-        <Input id="name" placeholder={employee?.name} {...register('name')} />
+        <Input id="name" defaultValue={employee?.name} {...register('name')} />
         <FormErrorMessage>
           {errors.name && errors.name.message}
         </FormErrorMessage>
 
         <FormLabel htmlFor="role">Cargo</FormLabel>
-        <Input id="role" placeholder={employee?.role} {...register('role')} />
+        <Input id="role" defaultValue={employee?.role} {...register('role')} />
         <FormErrorMessage>
           {errors.role && errors.role.message}
         </FormErrorMessage>
@@ -83,7 +82,7 @@ export const UpdateEmployeeForm = () => {
         <FormLabel htmlFor="department">Departamento</FormLabel>
         <Input
           id="department"
-          placeholder={employee?.department}
+          defaultValue={employee?.department}
           {...register('department')}
         />
         <FormErrorMessage>
@@ -94,7 +93,7 @@ export const UpdateEmployeeForm = () => {
         <Input
           id="admission_date"
           type="date"
-          placeholder={employee?.admission_date?.toString()}
+          defaultValue={employee?.admission_date?.toString()}
           {...register('admission_date')}
         />
         <FormErrorMessage>
