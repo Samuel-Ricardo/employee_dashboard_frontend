@@ -10,9 +10,7 @@ export const HomePage = async () => {
   try {
     employees = (await MODULES.APPLICATION.CONTROLLER.EMPLOYEE().findAll())
       .result;
-  } catch (error) {
-    console.log({ error });
-  }
+  } catch (error) {}
 
   return (
     <Box>
