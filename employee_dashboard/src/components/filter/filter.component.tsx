@@ -9,7 +9,7 @@ import {
   RadioGroup,
   VStack,
 } from '@chakra-ui/react';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { IEmployeeFilterProps } from '../../@types/components/filter/employee.filter';
 import { useEmployeeFilter } from '../../hook/employee/filter.hook';
 import { useEmployees } from '../../hook/query/employee/all.hook';
@@ -43,6 +43,10 @@ export const EmployeeFilter = ({ employees }: IEmployeeFilterProps) => {
   };
 
   const onClick = useCallback(() => {
+    sync(response?.result || employees);
+  }, [sync, response?.result, employees]);
+
+  useEffect(() => {
     sync(response?.result || employees);
   }, [sync, response?.result, employees]);
 

@@ -93,7 +93,9 @@ export const UpdateEmployeeForm = () => {
         <Input
           id="admission_date"
           type="date"
-          defaultValue={employee?.admission_date?.toString()}
+          defaultValue={
+            new Date(employee?.admission_date || '').toJSON()?.split('T')[0]
+          }
           {...register('admission_date')}
         />
         <FormErrorMessage>
