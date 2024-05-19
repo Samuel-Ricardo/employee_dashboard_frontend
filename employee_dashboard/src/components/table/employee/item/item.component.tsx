@@ -12,6 +12,7 @@ export const EmployeeTableItem = ({
   name,
   role,
   department,
+  onDelete,
 }: IEmployeeTableItem) => {
   const _module = MODULES.APPLICATION.CONTROLLER.EMPLOYEE();
 
@@ -25,7 +26,14 @@ export const EmployeeTableItem = ({
           <Link href={`/employee/${id}/edit`}>
             <Button>Editar</Button>
           </Link>
-          <Button onClick={() => _module.delete({ id })}>Excluir</Button>
+          <Button
+            onClick={() => {
+              _module.delete({ id });
+              onDelete && onDelete(id);
+            }}
+          >
+            Excluir
+          </Button>
         </Stack>
       </Td>
     </Tr>

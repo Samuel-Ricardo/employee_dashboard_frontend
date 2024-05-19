@@ -7,7 +7,7 @@ import { IEmployeeDTO } from '../../../module/domain/DTO/employee/employee.dto';
 export const useEmployees = () => {
   const MODULE = MODULES.APPLICATION.CONTROLLER.EMPLOYEE();
 
-  const { data, isPending, error } = useQuery<
+  const { data, isPending, error, refetch } = useQuery<
     any,
     any,
     { result: IEmployeeDTO[] }
@@ -20,5 +20,6 @@ export const useEmployees = () => {
     data,
     isPending,
     error,
+    refetch,
   };
 };
