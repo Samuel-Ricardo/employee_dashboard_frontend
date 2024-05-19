@@ -1,4 +1,4 @@
-# Employee Dashboard [ backend ]
+# Employee Dashboard [ FRONTEND ]
 
 ![image](https://github.com/Samuel-Ricardo/employee-dashboard_backend/assets/63983021/a318896c-6645-424d-8ef6-06fac133a79d)
 
