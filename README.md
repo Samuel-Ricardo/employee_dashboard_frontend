@@ -176,7 +176,7 @@ DATABASE_URL=mongodb://root:root@mongo:27017
 Create a `.env.local` file with this variables:
 
 ```env
-NEXT_PUBLIC_API_URL=https://employee-dashboard-backend-main.onrender.com
+NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
 
 Now run it using `docker-compose`
@@ -209,11 +209,12 @@ Now run it using `docker-compose`
 
 You also can use the Docker Image:
 
+```docker
+$ docker pull ghcr.io/samuel-ricardo/employee_dashboard_frontend:main
 ```
 
-docker pull ghcr.io/samuel-ricardo/employee_dashboard_frontend:main
-
-FROM ghcr.io/samuel-ricardo/employee_dashboard_frontend:main
+```Dockerfile
+$ FROM ghcr.io/samuel-ricardo/employee_dashboard_frontend:main
 
 ```
 
