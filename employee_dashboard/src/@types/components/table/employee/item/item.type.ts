@@ -3,4 +3,5 @@ export interface IEmployeeTableItem {
   name: string;
   role: string;
   department: string;
+  onDelete?: (id: string) => void;
 }
