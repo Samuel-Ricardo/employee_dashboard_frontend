@@ -12,7 +12,6 @@ export class HttpNodeEngine implements IHTTPGateway<RequestInit, Response> {
   }
 
   async get(url: string, config?: RequestInit) {
-    console.log({ url: this._defaultConfig(`get::${url}`).next?.tags });
     return await fetch(url, {
       ...this._defaultConfig(`get::${url}`),
       ...config,
@@ -20,7 +19,6 @@ export class HttpNodeEngine implements IHTTPGateway<RequestInit, Response> {
   }
 
   async post<B>(url: string, body: B, config?: RequestInit) {
-    console.log({ body });
     return await fetch(url, {
       ...this._defaultConfig(`post::${url}`),
       ...config,
