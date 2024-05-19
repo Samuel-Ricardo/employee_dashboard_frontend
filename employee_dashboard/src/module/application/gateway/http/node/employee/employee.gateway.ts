@@ -7,7 +7,7 @@ import { IUpdateEmployeeDTO } from '../../../../../domain/DTO/employee/update.dt
 import { ICreateEmployeeOutputDTO } from '../../../../../domain/DTO/outoput/employee/create.dto';
 import { Employee } from '../../../../../domain/entity/employee.entity';
 import { IEmployeeGateway } from '../../../../../domain/gateway/employee.gateway';
-import { inject, injectable } from 'inversify';
+import { injectable } from 'inversify';
 import { MODULE } from '../../../../../app.registry';
 import { injectConfig } from '../../../../../infra/config/config.module';
 import { ENV } from '../../../../../infra/config/env/env.config';
@@ -23,23 +23,17 @@ export class NodeHttpEmployeeGateway
   private readonly _url = `${this.API_URL}/api/employees`;
 
   async create(DTO: ICreateEmployeeDTO) {
-    console.log({ DTO });
     const response = await this._engine.post(this._url, DTO);
-    const responseadomamamia = (await response?.json()).result;
+    const employee = (await response?.json()).result;
 
-    console.log({ responseadomamamia });
-
-    return responseadomamamia as ICreateEmployeeOutputDTO;
+    return employee as ICreateEmployeeOutputDTO;
   }
 
   async findAll() {
     const response = await this._engine.get(this._url);
-    const responseadomamamia = (await response?.json())
-      .result as IEmployeeDTO[];
+    const employee = (await response?.json()).result as IEmployeeDTO[];
 
-    console.log({ responseadomamamia });
-
-    return responseadomamamia.map(Employee.fromDTO);
+    return employee.map(Employee.fromDTO);
   }
 
   async findOne({ id }: IFindOneEmployeeDTO) {
@@ -54,7 +48,6 @@ export class NodeHttpEmployeeGateway
   }
 
   async delete({ id }: IDeleteEmployeeDTO) {
-    console.log('AAAAAAAAAAAAAAAAAAA', { id }, this._url);
     await this._engine.delete(`${this._url}/${id}`);
   }
 }

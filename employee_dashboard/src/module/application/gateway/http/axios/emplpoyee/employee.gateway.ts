@@ -19,20 +19,16 @@ export class AxiosHttpEmployeeGateway
 
   async create(DTO: ICreateEmployeeDTO) {
     const response = await this._engine.post(this._url, DTO);
-    const responseadomamamia = await response.data.result;
+    const employee = await response.data.result;
 
-    console.log({ responseadomamamia });
-
-    return { id: responseadomamamia.id } as ICreateEmployeeOutputDTO;
+    return { id: employee.id } as ICreateEmployeeOutputDTO;
   }
 
   async findAll() {
     const response = await this._engine.get(this._url);
-    const responseadomamamia = (await response.data.result) as IEmployeeDTO[];
+    const employee = (await response.data.result) as IEmployeeDTO[];
 
-    console.log({ responseadomamamia });
-
-    return responseadomamamia.map(Employee.fromDTO);
+    return employee.map(Employee.fromDTO);
   }
 
   async findOne({ id }: IFindOneEmployeeDTO) {

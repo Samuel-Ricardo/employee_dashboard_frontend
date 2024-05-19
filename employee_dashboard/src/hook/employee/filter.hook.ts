@@ -13,8 +13,6 @@ export const useEmployeeFilter = () => {
             )
           : data;
 
-      console.log({ result });
-
       switch (order) {
         case 'name':
           return result.sort((a, b) =>
