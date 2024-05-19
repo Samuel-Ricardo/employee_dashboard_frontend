@@ -161,12 +161,22 @@ This application use `Docker` so you dont need to install and cofigurate anythin
 
 Navigate to project folder `$ cd ./employee_dashboard/` 
 
+<br>
+
 Create a `.env` file with this variables:
 
 ```env
 
 DATABASE_URL=mongodb://root:root@mongo:27017
 
+```
+
+<br>
+
+Create a `.env.local` file with this variables:
+
+```env
+NEXT_PUBLIC_API_URL=https://employee-dashboard-backend-main.onrender.com
 ```
 
 Now run it using `docker-compose`
