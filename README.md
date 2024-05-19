@@ -159,7 +159,17 @@ This application use `Docker` so you dont need to install and cofigurate anythin
 
 <br>
 
-Navigate to project folder `$ cd ./employee_dashboard/` and run it using `docker-compose`
+Navigate to project folder `$ cd ./employee_dashboard/` 
+
+Create a `.env` file with this variables:
+
+```env
+
+DATABASE_URL=mongodb://root:root@mongo:27017
+
+```
+
+Now run it using `docker-compose`
 
 ```bash
 
